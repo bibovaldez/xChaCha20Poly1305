@@ -20,5 +20,6 @@ Route::middleware([
     })->name('dashboard');
     Route::post('/xchacha', [EncryptionController::class, 'index'])->name('encrypt');
     Route::post('/xchacha/decrypt', [DecryptionController::class, 'index'])->name('decrypt');
+    Route::post('/xchacha/text', [EncryptionController::class, 'indextext'])->name('encrypttext');
 });
 

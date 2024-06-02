@@ -45,6 +45,26 @@
                 </div>
             </form>
         </div>
+
+        {{-- TEXT encryption --}}
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <form action="{{ route('encrypttext') }}" method="post">
+                @csrf
+                {{-- fiel upload --}}
+                <div class="mb-6">
+                    <label for="file" class="block text-sm font-medium leading-5 text-gray-700">Text Encryption</label>
+                    <input type="text" name="text" id="text"
+                        class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150"
+                        required>
+                </div>
+                <div>
+                    <button type="submit"
+                        class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        {{ __('Upload') }}
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
 </div>

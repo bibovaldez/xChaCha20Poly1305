@@ -12,7 +12,7 @@ class EncryptionController extends Controller
         $nonce = base64_decode(env('Nonce'));
         // aditional data is hashed
         $additional_data = hash('sha256', env('AD'), true);
-        
+
         // Validate the file 
         $request->validate([
             'file' => 'required|image|mimes:jpeg,png,jpg',
@@ -71,5 +71,31 @@ class EncryptionController extends Controller
             $key
         );
         return $ciphertext;
+    }
+
+
+    public function indextext(Request $request)
+    {
+        $key = base64_decode(env('KEY'));
+        $nonce = base64_decode(env('Nonce'));
+        // aditional data is hashed
+        $additional_data = hash('sha256', env('AD'), true);
+        // Validate the file
+        $request->validate([
+            'text' => 'required',
+        ]);
+
+        // Get the file
+        $text = $request->text;
+
+        $encryptedData = $this->encryption($text, $key, $nonce, $additional_data);
+
+        dd($encryptedData);
+        $encryptedFilename = 'text.txt';
+        // automatic download of the encrypted image
+        // dd($encryptedData);
+        return response(base64_encode($encryptedData))
+            ->header('Content-Type', 'application/octet-stream')
+            ->header('Content-Disposition', 'attachment; filename="' . $encryptedFilename . '"');
     }
 }
